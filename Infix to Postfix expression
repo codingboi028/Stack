@@ -1,0 +1,76 @@
+package cp;
+import java.util.*;
+public class TwoStack
+{
+	
+    public static void main(String[] args) {
+    	String res = "";
+    	String ques = "";
+    		Stack<Character> mystack = new Stack<Character>();
+    		for(int i=0;i<ques.length();i++) {
+    			if(Character.isLetterOrDigit(ques.charAt(i))==true) {
+    				res+=ques.charAt(i);
+    				
+    			}
+    			else if(mystack.isEmpty()==true && (ques.charAt(i)=='('||ques.charAt(i)!='+' ||ques.charAt(i)!='-'||
+    					ques.charAt(i)!='*'||ques.charAt(i)!='/' ||ques.charAt(i)!='^')) {
+    				mystack.push(ques.charAt(i));
+    			}
+    			else if(ques.charAt(i)=='(') {mystack.add('(');}
+    			else if(ques.charAt(i)=='^') {mystack.add('^');}
+    			else if(ques.charAt(i)==')') {
+    				while(mystack.peek()!='(') {res+=mystack.peek();mystack.pop();}
+    				mystack.pop();
+    			}
+    			else if(ques.charAt(i)=='*'||ques.charAt(i)=='/') {
+    				if(mystack.peek()=='+'|| mystack.peek()=='-'||mystack.peek()=='(') {
+    					mystack.push(ques.charAt(i));
+    				}
+    				else if(mystack.peek()=='*'||mystack.peek()=='/') {
+    					res+=mystack.peek();
+    					mystack.pop();
+    					mystack.push(ques.charAt(i));
+    				}
+    				else if(mystack.peek()=='^'){
+    					res+=mystack.peek();
+    					mystack.pop();
+    					mystack.push(ques.charAt(i));
+    				}
+    			}
+    			else if(ques.charAt(i)=='+'||ques.charAt(i)=='-'){
+    				if(mystack.peek()=='^'|| mystack.peek()=='*'||mystack.peek()=='/') {
+    					while(mystack.isEmpty()==false && (mystack.peek()=='^'|| mystack.peek()=='*'||mystack.peek()=='/')) {
+    					res+=mystack.peek();
+    					mystack.pop();}
+    					if(mystack.isEmpty()==false && (mystack.peek()=='+'||mystack.peek()=='-')) {
+        					res+=mystack.peek();
+        					mystack.pop();
+        					mystack.push(ques.charAt(i));}
+    					else {mystack.push(ques.charAt(i));}
+    					
+    				}
+    				else if(mystack.peek()=='+'||mystack.peek()=='-') {
+    					res+=mystack.peek();
+    					mystack.pop();
+    					mystack.push(ques.charAt(i));
+    				}
+    				else if(mystack.peek()=='('){
+    					mystack.push(ques.charAt(i));
+    				}
+    			}
+    			System.out.println(res);
+                System.out.println(mystack);
+    			}
+    			
+    		while(mystack.isEmpty()!=true) {res+=mystack.peek();mystack.pop();
+    			
+    		
+    			
+    			}
+        System.out.println(res);
+        System.out.println(mystack);
+        
+        
+    	}
+    		
+}
