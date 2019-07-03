@@ -1,0 +1,24 @@
+class solve{
+    public static int evaluatePostFix(String exp){
+        
+        String ques = exp;
+    	Stack<Integer> mystack = new Stack<Integer>();
+    	for(int  i=0;i<ques.length();i++) {
+    		if(Character.isDigit(ques.charAt(i))==true) {mystack.push(Character.getNumericValue(ques.charAt(i)));}
+    		
+    		else {
+    			int val1 =(int) mystack.peek();
+    			mystack.pop();
+    			int val2 = (int)mystack.peek();
+    			mystack.pop();
+    			if(ques.charAt(i)=='+') {int ans = (val2+val1);mystack.push( ans);}
+    			if(ques.charAt(i)=='-') {int ans = (val2-val1);mystack.push( ans);}
+    			if(ques.charAt(i)=='*') {int ans = (val2*val1);mystack.push( ans);}
+    			if(ques.charAt(i)=='/') {int ans = (val2/val1);mystack.push( ans);}
+    		}
+    		
+    	}return mystack.peek();
+    	
+    }
+    
+}
